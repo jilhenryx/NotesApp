@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.153" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_add_48.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_category_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_category_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_dashboard_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_delete_30.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_library_books_24.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_library_books_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_navigate_previous_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_note_110.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_note_24.xml" value="0.153" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_note_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_other_30.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_other_32.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_pen_24.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_personal_32.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_study_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_study_32.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_undo_all_24.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_work_30.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_baseline_work_32.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/ic_notesapp_splash_graphic_dark.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/notesapp_splash_graphic.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/notesapp_splash_graphic_light.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_add_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_add_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_arrow_back_ios_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_clear_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_clear_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_edit_note_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_edit_note_30.xml" value="0.1" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_notes_24.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/round_notes_30.xml" value="0.1725" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/splash_screen_drawable.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/splash_screen_drawable_dark.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/drawable/splash_screen_drawable_light.xml" value="0.159" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/font/open_sans_font_family.xml" value="0.2125" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_main.xml" value="0.11775362318840579" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_main_content.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_note_content.xml" value="0.13671875" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_note_list.xml" value="0.11775362318840579" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_note_list_content.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_note_list_drawer.xml" value="0.22" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_note_list_main.xml" value="0.22" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/activity_note_main.xml" value="0.2" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/category_list_item.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/fragment_notes_list_content.xml" value="0.1" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/fragment_splash_screen.xml" value="0.17" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/nav_header.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/layout/note_list_item.xml" value="0.25" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/menu-v26/activity_main_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/menu/activity_main_menu.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/menu/activity_note_bottom_nav_menu.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/menu/activity_note_menu.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/menu/fragment_category_menu.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/menu/fragment_notes_menu.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Jil Henry/Documents/Programming/Android/NotesApp/app/src/main/res/menu/nav_menu.xml" value="0.15765765765765766" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

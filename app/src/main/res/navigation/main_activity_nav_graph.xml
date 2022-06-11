@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_activity_nav_graph"
+    app:startDestination="@+id/fragment_note_list">
+
+    <fragment
+        android:name="com.example.notesapp.ui.NoteListFragment"
+        android:label="@string/fragment_note_list_title"
+        android:id="@+id/fragment_note_list">
+        <action
+            android:id="@+id/action_fragment_note_list_to_fragment_category_list"
+            app:destination="@id/fragment_category_list"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:restoreState="true" />
+    </fragment>
+    <fragment
+        android:name="com.example.notesapp.ui.CategoryListFragment"
+        android:label="@string/fragment_category_list_title"
+        android:id="@+id/fragment_category_list">
+        <action
+            android:id="@+id/action_fragment_category_list_to_fragment_note_list"
+            app:destination="@id/fragment_note_list"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+</navigation>

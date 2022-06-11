@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_nav_menu_undo_all"
+        android:icon="@drawable/ic_baseline_undo_all_24"
+        android:title="@string/bottom_nav_menu_undo_all_title" />
+    <item
+        android:id="@+id/bottom_nav_menu_undo"
+        android:icon="@drawable/ic_baseline_undo_24"
+        android:title="@string/bottom_nav_menu_undo_title" />
+    <item
+        android:id="@+id/bottom_nav_menu_redo"
+        android:icon="@drawable/ic_baseline_redo_24"
+        android:title="@string/bottom_nav_menu_redo_title" />
+    <item
+        android:id="@+id/bottom_nav_menu_redo_all"
+        android:icon="@drawable/ic_baseline_redo_all_24"
+        android:title="@string/bottom_nav_menu_redo_all_title" />
+
+
+</menu>

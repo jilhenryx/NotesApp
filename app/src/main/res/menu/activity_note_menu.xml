@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/activity_note_menu_read"
+        android:icon="@drawable/round_notes_24"
+        android:title="@string/activity_note_menu_read_title"
+        android:visible="false"
+        app:tint="?attr/colorOnSurface"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/activity_note_menu_edit"
+        android:icon="@drawable/round_edit_note_30"
+        android:title="@string/activity_note_menu_edit_title"
+        app:tint="?attr/colorOnSurface"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/activity_note_menu_save"
+        android:icon="@drawable/ic_baseline_save_30"
+        android:title="@string/activity_note_menu_save_title"
+        app:tint="?attr/colorOnSurface"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/activity_note_menu_ignore"
+        android:icon="@drawable/round_clear_30"
+        android:title="@string/activity_note_menu_ignore_title"
+        app:tint="?attr/colorOnSurface"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/activity_note_menu_delete"
+        android:icon="@drawable/ic_baseline_delete_30"
+        app:tint="?attr/colorOnSurface"
+        android:title="@string/activity_note_menu_delete_title"
+        app:showAsAction="never" />
+</menu>

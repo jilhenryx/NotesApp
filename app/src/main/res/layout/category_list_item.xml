@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_category_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:strokeColor="@color/yellow_900"
+        app:strokeWidth="@dimen/stroke_small"
+        app:cardCornerRadius="@dimen/margin_small"
+        app:cardElevation="@dimen/elevation_small"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/padding_small">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_category_list_item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="@string/tv_default_text"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_view_category_list_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:src="@drawable/ic_baseline_category_24"
+                android:contentDescription="@string/iv_default_name"
+                android:layout_marginTop="@dimen/margin_small"
+                app:tint="?attr/colorOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_category_list_item_title"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

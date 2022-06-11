@@ -1,0 +1,45 @@
+<resources>
+
+    <style name="Theme.NotesAppBase" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="background">@color/yellow_50</item>
+        <item name="backgroundColor">@color/yellow_50</item>
+        <item name="android:colorBackground">@color/yellow_50</item>
+        <item name="colorSurface">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/yellow_50</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Theme.NotesAppBase.NotesApp">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/amber_A700</item>
+        <item name="colorPrimaryVariant">@color/amber_A700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/amber_A400</item>
+        <item name="colorSecondaryVariant">@color/amber_A700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!--Other Colors-->
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <!--Typography -->
+        <item name="fontFamily">@font/open_sans_font_family</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    //Splash Theme
+
+    <style name="Theme.NotesAppBase.SplashTheme">
+        <item name="android:windowBackground">@drawable/splash_screen_drawable_light</item>
+    </style>
+
+
+    <style name="Themes.NotesApp.ToolbarTextAppearance" parent="@style/TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

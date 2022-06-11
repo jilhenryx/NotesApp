@@ -1,0 +1,35 @@
+<resources>
+
+    <style name="Theme.NotesAppBase" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="background">@color/dark_gray</item>
+        <item name="backgroundColor">@color/dark_gray</item>
+        <item name="android:colorBackground">@color/dark_gray</item>
+        <!-- Status bar color. -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Theme.NotesAppBase.NotesApp">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/grey_200</item>
+        <item name="colorPrimaryVariant">@color/grey_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_grey_700</item>
+        <item name="colorSecondaryVariant">@color/blue_grey_500</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!--Other Colors-->
+        <item name="android:statusBarColor">@color/dark_gray</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <!--Typography -->
+        <item name="fontFamily">@font/open_sans_font_family</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="Theme.NotesAppBase.SplashTheme">
+        <item name="android:windowBackground">@drawable/splash_screen_drawable_dark</item>
+        <item name="android:statusBarColor">@color/dark_gray</item>
+    </style>
+</resources>

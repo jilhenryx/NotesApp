@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/fragment_note_list"
+            android:icon="@drawable/ic_baseline_library_books_24"
+            android:title="@string/menu_all_notes_title"
+            app:showAsAction="ifRoom"
+            android:visible="false" />
+        <item
+            android:id="@+id/fragment_category_list"
+            android:icon="@drawable/ic_baseline_category_24"
+            android:title="@string/menu_categories_title"
+            app:showAsAction="ifRoom" />
+    </group>
+</menu>

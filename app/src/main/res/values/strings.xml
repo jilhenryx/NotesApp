@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">NotesApp</string>
+    <!--Defaults-->
+    <string name="tv_default_text">Lorem Ispum</string>
+    <string name="iv_default_name">Image Icon</string>
+    <!--Content Descriptions-->
+    <string name="fab_add_note_content_description">Create a New Note</string>
+    <string name="action_bar_toggle_open_description">Open Navigation Drawer</string>
+    <string name="action_bar_toggle_close_description">Close Navigation Draw</string>
+    <!--TextView and EditText-->
+    <string name="fragment_note_list_title">Notes</string>
+    <string name="fragment_category_list_title">Categories</string>
+    <string name="activity_note_title">Edit Note</string>
+    <string name="et_note_title_hint">Note Title</string>
+    <string name="et_note_body_hint">Note Text</string>
+    <string name="tv_note_date_modified">Date Modified: %s</string>
+    <!--Menu Title-->
+    <string name="menu_notes_title">Notes</string>
+    <string name="menu_categories_title">Categories</string>
+    <string name="menu_all_notes_title">All Notes</string>
+    <string name="activity_note_menu_read_title">Read Note</string>
+    <string name="activity_note_menu_edit_title">Edit Note</string>
+    <string name="activity_note_menu_save_title">Save Note</string>
+    <string name="activity_note_menu_ignore_title">Ignore Changes</string>
+    <string name="activity_note_menu_delete_title">Delete Note</string>
+    <string name="bottom_nav_menu_undo_all_title">Undo All</string>
+    <string name="bottom_nav_menu_undo_title">Undo</string>
+    <string name="bottom_nav_menu_redo_title">Redo</string>
+    <string name="bottom_nav_menu_redo_all_title">Redo All</string>
+    <string name="undo_redo_helper_pref_file">NoteEditTextUndoRedoHelper</string>
+
+</resources>
