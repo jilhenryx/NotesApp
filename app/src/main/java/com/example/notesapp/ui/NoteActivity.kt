@@ -25,7 +25,7 @@ private const val TAG = "NoteActivity"
 
 @AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
-    private lateinit var textViewDateModified: TextView
+    private lateinit var textViewNoteDate: TextView
     private lateinit var autoCompleteNoteCategory: AutoCompleteTextView
     private lateinit var editTextNoteTitle: TextInputEditText
     private lateinit var editTextNoteText: TextInputEditText
@@ -38,9 +38,10 @@ class NoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityNoteMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.allowEnterTransitionOverlap = true
         // Initializing Views
         val toolbar = binding.toolbarActivityNote
-        textViewDateModified = binding.activityNoteContent.textViewActivityNoteDateModified
+        textViewNoteDate = binding.activityNoteContent.textViewActivityNoteDate
         autoCompleteNoteCategory = binding.activityNoteContent.autocompleteActivityNoteCategory
         editTextNoteTitle = binding.activityNoteContent.editTextActivityNoteTitle
         editTextNoteText = binding.activityNoteContent.editTextActivityNoteText
@@ -61,6 +62,9 @@ class NoteActivity : AppCompatActivity() {
             // Note Id only when the activity is created newly.
             viewModel.isNewNote = (viewModel.noteId < 0)
         }
+        title =
+            if (viewModel.isNewNote) getString(R.string.activity_note_new_title)
+            else getString(R.string.activity_note_title)
         initializeView()
     }
 
@@ -125,8 +129,9 @@ class NoteActivity : AppCompatActivity() {
         val categoryName = viewModel.getCategoryName(note.categoryId)
         autoCompleteNoteCategory.setText(categoryName, false)
 
-        textViewDateModified.text =
-            getString(R.string.tv_note_date_modified, note.dateModified)
+        textViewNoteDate.text =
+            if (viewModel.isNewNote) getString(R.string.tv_note_date_created, note.dateCreated)
+            else getString(R.string.tv_note_date_modified, note.dateModified)
 
         editTextNoteTitle.apply {
             setText(note.title)
@@ -244,11 +249,16 @@ class NoteActivity : AppCompatActivity() {
             R.id.activity_note_menu_ignore -> discardNoteChanges()
             R.id.activity_note_menu_delete -> {
                 deleteNote()
-                finish()
+                finishAfterTransition()
             }
         }
 
         return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAfterTransition()
     }
 
     override fun onDestroy() {

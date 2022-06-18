@@ -17,7 +17,7 @@
             android:id="@+id/toolbar_activity_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextAppearance="@style/Themes.NotesApp.ToolbarTextAppearance"
+            app:titleTextAppearance="@style/Theme.NotesAppGlobal.NotesAppBase.NotesApp.ToolbarTextAppearance"
             app:titleTextColor="?attr/colorPrimary"
             android:background="?attr/background"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

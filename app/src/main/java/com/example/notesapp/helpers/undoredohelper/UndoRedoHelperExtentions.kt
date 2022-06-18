@@ -13,8 +13,8 @@ internal fun EditText.setUpWithEditTextFieldUndoRedoHelper(
     lifecycleOwner: LifecycleOwner,
     undoRedoNavController: UndoRedoNavMenuController,
     context: Context
-): EditTextFieldUndoRedoHelper {
-    return EditTextFieldUndoRedoHelper(
+): UndoRedoTextHelper {
+    return UndoRedoTextHelper(
         context,
         lifecycleOwner,
         this,

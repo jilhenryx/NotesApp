@@ -11,9 +11,11 @@
     <string name="fragment_note_list_title">Notes</string>
     <string name="fragment_category_list_title">Categories</string>
     <string name="activity_note_title">Edit Note</string>
+    <string name="activity_note_new_title">New Note</string>
     <string name="et_note_title_hint">Note Title</string>
     <string name="et_note_body_hint">Note Text</string>
     <string name="tv_note_date_modified">Date Modified: %s</string>
+    <string name="tv_note_date_created">Date Created: %s</string>
     <!--Menu Title-->
     <string name="menu_notes_title">Notes</string>
     <string name="menu_categories_title">Categories</string>
@@ -28,5 +30,7 @@
     <string name="bottom_nav_menu_redo_title">Redo</string>
     <string name="bottom_nav_menu_redo_all_title">Redo All</string>
     <string name="undo_redo_helper_pref_file">NoteEditTextUndoRedoHelper</string>
+    <string name="transition_name_note_title">note_title</string>
+    <string name="transition_name_note_text">note_text</string>
 
 </resources>

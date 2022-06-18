@@ -8,26 +8,24 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.notesapp.R
 import com.example.notesapp.adapters.NoteListAdapter
 import com.example.notesapp.databinding.ActivityMainContentBinding
+import com.example.notesapp.interfaces.NotesAppClickListeners.OnNoteClickListener
+import com.example.notesapp.utility.NOTE_ID_INTENT_KEY
 import com.example.notesapp.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 private const val TAG = "NoteListFragment"
 
 @AndroidEntryPoint
-class NoteListFragment : Fragment() {
+class NoteListFragment : Fragment(), OnNoteClickListener {
     private var layoutManagerSpan = 2
     private var _binding: ActivityMainContentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-
-    @Inject
     lateinit var notesAdapter: NoteListAdapter
     private lateinit var staggeredLayoutManager: StaggeredGridLayoutManager
     private val viewModel: MainActivityViewModel by activityViewModels()
@@ -62,7 +60,7 @@ class NoteListFragment : Fragment() {
             else 2
 
         recyclerView = binding.recyclerView
-//        notesAdapter = NoteListAdapter(requireActivity())
+        notesAdapter = NoteListAdapter(this)
         staggeredLayoutManager =
             StaggeredGridLayoutManager(layoutManagerSpan, StaggeredGridLayoutManager.VERTICAL)
         displayNotes()
@@ -86,12 +84,20 @@ class NoteListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.fragment_note_list) {
-            viewModel.filterNotes("")
-            requireActivity().invalidateOptionsMenu()
+        return when (item.itemId) {
+            R.id.fragment_note_list -> {
+                viewModel.filterNotes("")
+                requireActivity().invalidateOptionsMenu()
+                true
+            }
+            R.id.fragment_category_list -> {
+                findNavController().navigate(R.id.action_fragment_note_list_to_fragment_category_list)
+                true
+            }
+            else -> {
+                false
+            }
         }
-        val navController = findNavController()
-        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -103,5 +109,11 @@ class NoteListFragment : Fragment() {
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    override fun onNoteClick(noteId: Long) {
+        val intent = Intent(requireActivity(), NoteActivity::class.java)
+        intent.putExtra(NOTE_ID_INTENT_KEY, noteId)
+        startActivity(intent)
     }
 }

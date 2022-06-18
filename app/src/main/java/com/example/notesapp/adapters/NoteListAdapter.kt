@@ -1,7 +1,5 @@
 package com.example.notesapp.adapters
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,12 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.data.NoteWithCategory
 import com.example.notesapp.databinding.NoteListItemBinding
-import com.example.notesapp.ui.NoteActivity
-import com.example.notesapp.utility.NOTE_ID_INTENT_KEY
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
+import com.example.notesapp.interfaces.NotesAppClickListeners.OnNoteClickListener
 
-class NoteListAdapter @Inject constructor(@ActivityContext private val context: Context) :
+class NoteListAdapter(private val noteClickListener: OnNoteClickListener) :
     ListAdapter<NoteWithCategory, NoteListAdapter.NotesViewHolder>(NOTES_COMPARATOR) {
 
     companion object {
@@ -65,9 +60,7 @@ class NoteListAdapter @Inject constructor(@ActivityContext private val context: 
 
         internal fun setOnClickListener(noteId: Long) {
             itemView.setOnClickListener {
-                val intent = Intent(context, NoteActivity::class.java)
-                intent.putExtra(NOTE_ID_INTENT_KEY, noteId)
-                context.startActivity(intent)
+                noteClickListener.onNoteClick(noteId)
             }
         }
 

@@ -23,9 +23,9 @@ import dagger.hilt.android.components.ActivityComponent
 * It implements TextWatcher and OnFocusChangeListener to monitor changes
 */
 
-private const val TAG = "EditTextFieldUndoRedoHelper"
+private const val TAG = "UndoRedoTextHelper"
 
-class EditTextFieldUndoRedoHelper(
+class UndoRedoTextHelper(
     context: Context,
     lifecycleOwner: LifecycleOwner,
     private val textView: EditText,
@@ -34,6 +34,8 @@ class EditTextFieldUndoRedoHelper(
     TextWatcher,
     View.OnFocusChangeListener, OnEditTextUndoRedoListener,
     DefaultLifecycleObserver {
+
+    private var isNewHelper = true
 
     /* Handles all Undo/Redo operations. Serves as an intermediary between this class
     * and the other helper classes
@@ -91,6 +93,7 @@ class EditTextFieldUndoRedoHelper(
     * Tracks Deletion Changes
     */
     override fun beforeTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+        // Log.d(TAG, "beforeTextChanged: $text , $start, $before, $count")
 
         //Do not track changes by Undo or Redo Operations to avoid errors
         if (changeByUndoRedo || text.isNullOrBlank()) return
@@ -116,7 +119,9 @@ class EditTextFieldUndoRedoHelper(
         if (undoRedoOperation.userIsDeleting) {
             if (hasEntryBeenSaved) hasEntryBeenSaved = false
             endIndex = currentCursorPos
-            wordBuffer.add(text[endIndex])
+            if (endIndex < text.length) {
+                wordBuffer.add(text[endIndex])
+            }
         }
         undoRedoNavMenuController.updateNavMenuState()
     }
@@ -128,19 +133,21 @@ class EditTextFieldUndoRedoHelper(
     */
     override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
 
-        //Do not track changes by Undo or Redo Operations to avoid errors
-        //Also, delete changes are not tracked here but in beforeTextChanged
-        if (changeByUndoRedo || undoRedoOperation.userIsDeleting || text.isNullOrBlank()) return
+        // Do not track changes by Undo or Redo Operations to avoid errors
+        // Also, delete changes are not tracked here but in beforeTextChanged
+        if (changeByUndoRedo || undoRedoOperation.userIsDeleting || text.isNullOrBlank() || isNewHelper) {
+            if (isNewHelper) isNewHelper = false
+            return
+        }
 
-        //Reset stored string used for redoAll as soon as user types
+        // Reset stored string used for redoAll as soon as user types
         if (undoRedoOperation.currentStoredString.isNotBlank())
             undoRedoOperation.currentStoredString = ""
 
-        //Reset as soon as user types
+        // Reset as soon as user types
         if (hasEntryBeenSaved) hasEntryBeenSaved = false
 
-        val currentCursorPos = start + before
-        trackChanges(currentCursorPos, text)
+        trackChanges(start, before, text)
 
         //Update Variables as soon as TextChanges from user but only once
         undoRedoNavMenuController.updateNavMenuState()
@@ -150,15 +157,16 @@ class EditTextFieldUndoRedoHelper(
 //==================================================================================================
 
     private var currentText: CharSequence? = null
-    private fun trackChanges(currentCursorPos: Int, text: CharSequence) {
+    private fun trackChanges(textStartIndex: Int, textBeforeIndex: Int, text: CharSequence) {
         //Prev Word saved or cursor position has changed so update watchers
+        val currentCursorPos = textStartIndex + textBeforeIndex
         if (startIndex < 0 || endIndex != currentCursorPos) {
             //Save changes to track text updates
             if (!hasEntryBeenSaved) storeWord(text)
 
             //Update watchers
-            startIndex = currentCursorPos
-            endIndex = startIndex
+            startIndex = if (textStartIndex == 0) textStartIndex else currentCursorPos
+            endIndex = currentCursorPos
         }
         //Monitor each character update
         currentText = text
@@ -225,15 +233,17 @@ class EditTextFieldUndoRedoHelper(
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         if (view == null) return
 
-        //Reset all states including NavMenuController states
-        resetWatchers()
-        with(undoRedoOperation) {
-            currentStoredString = ""
-            removeAllHistoryItems()
-        }
-        with(undoRedoNavMenuController) {
-            resetNavMenuState()
-            setNavViewVisibility(false)
+        //Reset all states including NavMenuController states when Focus Leaves EditText
+        if (!hasFocus) {
+            resetWatchers()
+            with(undoRedoOperation) {
+                currentStoredString = ""
+                removeAllHistoryItems()
+            }
+            with(undoRedoNavMenuController) {
+                resetNavMenuState()
+                setNavViewVisibility(false)
+            }
         }
 
         //Update State and set OriginalTextString for Undo All Operation
@@ -242,7 +252,7 @@ class EditTextFieldUndoRedoHelper(
             undoRedoOperation.originalTextString = focusedEditText?.text.toString().trimEnd()
 
             with(undoRedoNavMenuController) {
-                attachOnEditTextUndoRedoListener(this@EditTextFieldUndoRedoHelper)
+                attachOnEditTextUndoRedoListener(this@UndoRedoTextHelper)
                 setNavViewVisibility(true)
             }
         }

@@ -1,6 +1,12 @@
 <resources>
 
-    <style name="Theme.NotesAppBase" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.NotesAppGlobal" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+
+    </style>
+
+    <style name="Theme.NotesAppGlobal.NotesAppBase">
         <item name="background">@color/yellow_50</item>
         <item name="backgroundColor">@color/yellow_50</item>
         <item name="android:colorBackground">@color/yellow_50</item>
@@ -13,7 +19,7 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
     <!-- Base application theme. -->
-    <style name="Theme.NotesAppBase.NotesApp">
+    <style name="Theme.NotesAppGlobal.NotesAppBase.NotesApp">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/amber_A700</item>
         <item name="colorPrimaryVariant">@color/amber_A700</item>
@@ -34,12 +40,12 @@
 
     //Splash Theme
 
-    <style name="Theme.NotesAppBase.SplashTheme">
+    <style name="Theme.NotesAppGlobal.NotesAppBase.SplashTheme">
         <item name="android:windowBackground">@drawable/splash_screen_drawable_light</item>
     </style>
 
 
-    <style name="Themes.NotesApp.ToolbarTextAppearance" parent="@style/TextAppearance.Material3.HeadlineMedium">
+    <style name="Theme.NotesAppGlobal.NotesAppBase.NotesApp.ToolbarTextAppearance" parent="@style/TextAppearance.Material3.HeadlineSmall">
         <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -26,9 +26,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate:")
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_NotesAppBase_NotesApp)
+        setTheme(R.style.Theme_NotesAppGlobal_NotesAppBase_NotesApp)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.allowEnterTransitionOverlap = true
         //Set up toolbar
         toolbar = binding.toolbarActivityMain
         setSupportActionBar(toolbar)

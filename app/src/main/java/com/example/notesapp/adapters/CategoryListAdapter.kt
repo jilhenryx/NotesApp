@@ -6,11 +6,11 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.data.Category
 import com.example.notesapp.databinding.CategoryListItemBinding
-import com.example.notesapp.interfaces.OnCategoryClickedListener
+import com.example.notesapp.interfaces.NotesAppClickListeners.OnCategoryClickListener
 
 class CategoryListAdapter(
     private val categories: List<Category>,
-    private val categoryClickedListener: OnCategoryClickedListener
+    private val categoryClickListener: OnCategoryClickListener
 ) :
     RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder>() {
 
@@ -46,7 +46,7 @@ class CategoryListAdapter(
 
         internal fun setOnCategoryClickListener(category: Category) {
             itemView.setOnClickListener {
-                categoryClickedListener.onCategoryClicked(category)
+                categoryClickListener.onCategoryClick(category)
             }
         }
 

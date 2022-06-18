@@ -7,19 +7,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.R
 import com.example.notesapp.adapters.CategoryListAdapter
 import com.example.notesapp.data.Category
 import com.example.notesapp.databinding.ActivityMainContentBinding
-import com.example.notesapp.interfaces.OnCategoryClickedListener
+import com.example.notesapp.interfaces.NotesAppClickListeners.OnCategoryClickListener
 import com.example.notesapp.viewmodels.MainActivityViewModel
 
 private const val TAG = "CategoryListFragment"
 
-class CategoryListFragment : Fragment(), OnCategoryClickedListener {
+class CategoryListFragment : Fragment(), OnCategoryClickListener {
     private lateinit var binding: ActivityMainContentBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var categoryAdapter: CategoryListAdapter
@@ -57,7 +56,7 @@ class CategoryListFragment : Fragment(), OnCategoryClickedListener {
         if (recyclerView.adapter == null) recyclerView.adapter = categoryAdapter
     }
 
-    override fun onCategoryClicked(category: Category) {
+    override fun onCategoryClick(category: Category) {
         Log.d(TAG, "onCategoryClicked: ")
         viewModel.filterNotes(category.name)
         findNavController().navigate(R.id.action_fragment_category_list_to_fragment_note_list)
@@ -68,9 +67,10 @@ class CategoryListFragment : Fragment(), OnCategoryClickedListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController()) || super.onOptionsItemSelected(
-            item
-        )
+        return if (item.itemId == R.id.fragment_note_list) {
+            findNavController().navigate(R.id.action_fragment_category_list_to_fragment_note_list)
+            true
+        } else false
     }
 
 }
