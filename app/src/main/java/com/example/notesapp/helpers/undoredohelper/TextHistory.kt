@@ -72,7 +72,7 @@ class TextHistory @Inject constructor() {
         } catch (e: Exception) {
             Log.d(TAG, "performUndo: Exception caught: ${e.message}")
             removeCurrentNode()
-            onComplete(oldText, oldText.length, false, false)
+            onComplete(oldText, oldText.length, false, true)
 //            performUndo(oldText, isDeleting) { text, endIndex, deactivateUndo ->
 //                onComplete(text, endIndex, deactivateUndo)
 //            }
@@ -89,7 +89,9 @@ class TextHistory @Inject constructor() {
         isDeleting: Boolean,
         onComplete: (text: String, endIndex: Int, isSuccess: Boolean, deactivateRedo: Boolean) -> Unit
     ) {
-        currentTextNode = if (isDeleting) currentTextNode else currentTextNode?.nextNode
+        currentTextNode = if (isDeleting) currentTextNode else {
+            currentTextNode?.nextNode ?: startTextNode
+        }
 
         if (currentTextNode == null) {
             onComplete(oldText, oldText.length, false, true)
@@ -98,11 +100,18 @@ class TextHistory @Inject constructor() {
 
         //Get TextItem
         val item = currentTextNode!!.textItem
-        val itemIndex = item.range.first
+        val itemStartIndex = item.range.first
+        val itemText = item.text
 
         try {
             Log.d(TAG, "performRedo: TextItem = $item")
-            val newText = oldText.replaceRange(itemIndex, itemIndex, item.text)
+            val newText =
+                if (oldText.isEmpty()) {
+                    Log.d(TAG, "performRedo: updating end")
+                    itemText
+                } else {
+                    oldText.replaceRange(itemStartIndex, itemStartIndex, item.text)
+                }
             val shouldDeactivate = if (isDeleting) {
                 true
             } else {
@@ -113,14 +122,14 @@ class TextHistory @Inject constructor() {
         } catch (e: Exception) {
             Log.d(TAG, "performRedo: Exception caught: ${e.message}")
             removeCurrentNode()
-            onComplete(oldText, oldText.length, false, false)
+            onComplete(oldText, oldText.length, false, true)
         }
     }
 
     private fun removeCurrentNode() {
         if (currentTextNode == null) return
         currentTextNode = currentTextNode!!.prevNode
-        currentTextNode!!.nextNode = null
+        currentTextNode?.nextNode = null
         //update end node pointer to point to the new end of the list
         endTextNode = currentTextNode
     }
@@ -132,7 +141,7 @@ class TextHistory @Inject constructor() {
     }
 
     internal fun gotoStartNode() {
-        currentTextNode = startTextNode
+        currentTextNode = startTextNode?.prevNode
     }
 
     internal fun gotoEndNode() {

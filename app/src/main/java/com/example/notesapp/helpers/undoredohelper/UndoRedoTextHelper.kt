@@ -65,6 +65,8 @@ class UndoRedoTextHelper(
     */
     private val wordBuffer = mutableListOf<Char>()
 
+    private var currentText: CharSequence? = null
+
     /*
     * @Field specifies if the word in @field wordBuffer has been saved in TextHistory
     */
@@ -132,6 +134,7 @@ class UndoRedoTextHelper(
     * store the old one using the lastStartIndex to the current start
     */
     override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+        Log.d(TAG, "onTextChanged: $text, $start, $before, $count")
 
         // Do not track changes by Undo or Redo Operations to avoid errors
         // Also, delete changes are not tracked here but in beforeTextChanged
@@ -147,7 +150,7 @@ class UndoRedoTextHelper(
         // Reset as soon as user types
         if (hasEntryBeenSaved) hasEntryBeenSaved = false
 
-        trackChanges(start, before, text)
+        trackChanges(start, before, count, text)
 
         //Update Variables as soon as TextChanges from user but only once
         undoRedoNavMenuController.updateNavMenuState()
@@ -156,24 +159,34 @@ class UndoRedoTextHelper(
     override fun afterTextChanged(text: Editable?) {}
 //==================================================================================================
 
-    private var currentText: CharSequence? = null
-    private fun trackChanges(textStartIndex: Int, textBeforeIndex: Int, text: CharSequence) {
+    private fun trackChanges(
+        textStartIndex: Int,
+        textBeforeIndex: Int,
+        count: Int,
+        text: CharSequence
+    ) {
         //Prev Word saved or cursor position has changed so update watchers
         val currentCursorPos = textStartIndex + textBeforeIndex
         if (startIndex < 0 || endIndex != currentCursorPos) {
             //Save changes to track text updates
-            if (!hasEntryBeenSaved) storeWord(text)
+            if (!hasEntryBeenSaved) {
+                Log.d(TAG, "trackChanges: Saving Changes and Update StartIndex")
+                storeWord(text)
+            }
 
             //Update watchers
             startIndex = if (textStartIndex == 0) textStartIndex else currentCursorPos
-            endIndex = currentCursorPos
+            //endIndex = currentCursorPos
         }
+        endIndex = textStartIndex + count - 1
+        Log.d(TAG, "trackChanges: endIndex = $endIndex")
         //Monitor each character update
         currentText = text
         if (endIndex < text.length) {
             wordBuffer.add(text[endIndex])
             //If whitespace is encountered, word is complete. Save word
             if (text[endIndex].isWhitespace()) {
+                Log.d(TAG, "trackChanges: Storing from Whitespace")
                 ++endIndex
                 storeWord(text)
                 --endIndex
@@ -277,9 +290,11 @@ class UndoRedoTextHelper(
 
         undoRedoOperation.undo(amount, oldText) { newText, index, isSuccess, shouldDeactivate ->
             if (isSuccess) {
+                //Log.d(TAG, "undoChanges: Updating Text Field")
                 setFocusedEditTextField(newText, index)
             }
             if (shouldDeactivate) {
+                Log.d(TAG, "undoChanges: Deactivating Undo Menu")
                 undoRedoNavMenuController.setUndoState(false)
                 undoRedoNavMenuController.updateNavMenu()
             }
@@ -292,9 +307,11 @@ class UndoRedoTextHelper(
 
         undoRedoOperation.redo(amount, oldText) { newText, index, isSuccess, shouldDeactivate ->
             if (isSuccess) {
+                //Log.d(TAG, "redoChanges: Updating Text Field")
                 setFocusedEditTextField(newText, index)
             }
             if (shouldDeactivate) {
+                Log.d(TAG, "redoChanges: Deactivating Redo Menu")
                 undoRedoNavMenuController.setRedoState(false)
                 undoRedoNavMenuController.updateNavMenu()
             }
