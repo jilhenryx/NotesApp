@@ -5,6 +5,11 @@ import javax.inject.Inject
 
 private const val TAG = "UndoRedoOperation"
 
+/*
+* This class handles all the operations of the UndoRedoHelper and communicates with the
+* Text History class that holds all the previous state of the textView
+*/
+
 class UndoRedoOperation @Inject constructor(private val textHistory: TextHistory) {
     /* Field to hold most recent string before first undo phase for redoAll Operation
     * This field is reset each time focus changes or user types with keyboard
@@ -25,55 +30,49 @@ class UndoRedoOperation @Inject constructor(private val textHistory: TextHistory
     /*
     * Perform Undo Operation
     * @params
-    *   type: the amount of undo to be performed. It is either undo change once or all changes
+    *   type: the amount of undo to be performed. It is either undo change once or undo all changes
     *   oldText: the current test in the EditText view
-    *   onUndoDone: callback after operation completes. The callback doesn't fire ir return value
-    *               is false
-    * @return
-    *   Boolean indicating if operation was successful or not
+    *   isDeleting: boolean indicating if text view state is deleting (used only here when
+    *               swapping operations)
+    *   onComplete: callback after operation completes.
      */
     internal fun undo(
         type: EditTextUndoRedoType,
         oldText: String,
         isDeleting: Boolean = false,
-        onComplete: (newText: String, index: Int) -> Unit
-    ): Boolean {
+        onComplete: (newText: String, index: Int, isSuccessful: Boolean, shouldDeactivate: Boolean) -> Unit
+    ) {
         checkCurrentStoredString(oldText)
 
         //User is Deleting so operation are swapped
         if (userIsDeleting) {
             Log.d(TAG, "undo: User Is Deleting")
             userIsDeleting = false
-            return redo(type, oldText, true) { newText, index ->
+            redo(type, oldText, true) { newText, index, isSucessful, shouldDeactivate ->
                 userIsDeleting = true
-                onComplete(newText, index)
+                onComplete(newText, index, isSucessful, shouldDeactivate)
             }
+            return
         }
 
         //Normal Undo Operation
-        return when (type) {
+        when (type) {
             EditTextUndoRedoType.ONCE -> {
                 if (oldText == originalTextString && !isDeleting) {
-                    false
+                    onComplete(oldText, oldText.length, false, true)
                 } else {
                     Log.d(TAG, "undo: Perform Undo Once")
-                    var isSuccess = false
                     textHistory.performUndo(
                         oldText,
                         isDeleting
-                    ) { text, endIndex, isSuccessful ->
-                        if (isSuccessful) {
-                            onComplete(text, endIndex)
-                            isSuccess = true
-                        }
+                    ) { text, endIndex, isSuccessful, shouldDeactivate ->
+                        onComplete(text, endIndex, isSuccessful, shouldDeactivate)
                     }
-                    isSuccess
                 }
             }
             EditTextUndoRedoType.ALL -> {
-                textHistory.setIndexToMin()
-                onComplete(originalTextString, originalTextString.length)
-                true
+                textHistory.gotoStartNode()
+                onComplete(originalTextString, originalTextString.length, true, true)
             }
         }
     }
@@ -83,60 +82,54 @@ class UndoRedoOperation @Inject constructor(private val textHistory: TextHistory
     }
 
     /*
-    * Perform Redo Operation
-    * @params
-    *   type: the amount of redo to be performed. It is either redo change once or all changes
-    *   oldText: the current test in the EditText view
-    *   onRedoDone: callback after operation completes. The callback doesn't fire ir return value
-    *               is false
-    * @return
-    *   Boolean indicating if operation was successful or not
-     */
+   * Perform Redo Operation
+   * @params
+   *   type: the amount of redo to be performed. It is either redo change once or redo all changes
+   *   oldText: the current test in the EditText view
+   *   isDeleting: boolean indicating if text view state is deleting (used only here when
+   *               swapping operations)
+   *   onComplete: callback after operation completes.
+    */
     internal fun redo(
         type: EditTextUndoRedoType,
         oldText: String,
         isDeleting: Boolean = false,
-        onComplete: (newText: String, index: Int) -> Unit
-    ): Boolean {
+        onComplete: (newText: String, index: Int, isSuccessful: Boolean, shouldDeactivate: Boolean) -> Unit
+    ) {
         //User is Deleting so operation are swapped
         if (userIsDeleting) {
             userIsDeleting = false
             Log.d(TAG, "redo: User is Deleting")
-            return undo(type, oldText, true) { newText, index ->
+            undo(type, oldText, true) { newText, index, isSuccessful, shouldDeactivate ->
                 userIsDeleting = true
-                onComplete(newText, index)
+                onComplete(newText, index, isSuccessful, shouldDeactivate)
             }
+            return
         }
         //Normal Redo Operation
-        return when (type) {
+        when (type) {
             EditTextUndoRedoType.ONCE -> {
                 if (oldText == currentStoredString && !isDeleting) {
-                    false
+                    onComplete(oldText, oldText.length, false, true)
                 } else {
                     Log.d(TAG, "redo: Performing Redo Once")
-                    var isSuccess = false
                     textHistory.performRedo(
                         oldText,
                         isDeleting
-                    ) { text, endIndex, isSuccessful ->
-                        if (isSuccessful) {
-                            onComplete(text, endIndex)
-                            isSuccess = true
-                        }
+                    ) { text, endIndex, isSuccessful, shouldDeactivate ->
+                        onComplete(text, endIndex, isSuccessful, shouldDeactivate)
                     }
-                    isSuccess
                 }
             }
             EditTextUndoRedoType.ALL -> {
-                textHistory.setIndexToMax()
-                onComplete(currentStoredString, currentStoredString.length)
-                true
+                textHistory.gotoEndNode()
+                onComplete(currentStoredString, currentStoredString.length, true, true)
             }
         }
     }
 
-    internal fun removeAllHistoryItems() {
-        textHistory.removeAllEntries()
+    internal fun clearTextHistory() {
+        textHistory.clearTextHistory()
     }
 
     internal fun addTextItem(item: TextItem) {

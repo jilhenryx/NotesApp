@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.example.notesapp.data.room.NoteDao
 import com.example.notesapp.data.room.NotesAppDatabase
 import com.example.notesapp.data.room.NotesAppDatabaseCallback
-import com.example.notesapp.data.room.TextItemDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,11 +22,6 @@ class HiltProvidesModule {
     }
 
     @Provides
-    fun provideTextItemDao(notesAppDatabase: NotesAppDatabase): TextItemDao {
-        return notesAppDatabase.textItemDao()
-    }
-
-    @Provides
     @Singleton
     fun providesRoomDatabase(
         @ApplicationContext context: Context,
@@ -35,7 +29,6 @@ class HiltProvidesModule {
     ): NotesAppDatabase {
         return Room.databaseBuilder(context, NotesAppDatabase::class.java, "notes_app_database")
             .addCallback(notesDatabaseCallback)
-            .fallbackToDestructiveMigration()
             .build()
     }
 

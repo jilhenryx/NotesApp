@@ -106,7 +106,7 @@ class UndoRedoTextHelper(
                 storeWord(text)
                 startIndex = currentCursorPos + 1
                 undoRedoOperation.userIsDeleting = true
-                undoRedoOperation.removeAllHistoryItems()
+                undoRedoOperation.clearTextHistory()
             }
             // User is no longer deleting so reset all watchers
             (before < count && undoRedoOperation.userIsDeleting) -> {
@@ -212,10 +212,9 @@ class UndoRedoTextHelper(
         }
         val textItem =
             TextItem(
-                index = startIndex,
-                range = TextItemRange(start = startIndex, end = end),
-                text = wordBuffer.joinToString("")
-            ).setTextItemID()
+                text = wordBuffer.joinToString(""),
+                range = IntRange(start = startIndex, endInclusive = end),
+            )
         Log.d(TAG, "saveEntry: TextItem = $textItem")
         undoRedoOperation.addTextItem(textItem)
         hasEntryBeenSaved = true
@@ -238,7 +237,7 @@ class UndoRedoTextHelper(
             resetWatchers()
             with(undoRedoOperation) {
                 currentStoredString = ""
-                removeAllHistoryItems()
+                clearTextHistory()
             }
             with(undoRedoNavMenuController) {
                 resetNavMenuState()
@@ -276,18 +275,14 @@ class UndoRedoTextHelper(
             else saveEntryAndResetWatchers()
         }
 
-        val isSuccessful = undoRedoOperation.undo(amount, oldText) { newText, index ->
-            setFocusedEditTextField(newText, index)
-            if (newText == undoRedoOperation.originalTextString) {
-                Log.d(TAG, "undoChanges: All Changes Undone")
-                undoRedoNavMenuController.setUndoState(false)
+        undoRedoOperation.undo(amount, oldText) { newText, index, isSuccess, shouldDeactivate ->
+            if (isSuccess) {
+                setFocusedEditTextField(newText, index)
             }
-        }
-
-        //Operation was not successful. Deactivate Undo menu items
-        if (!isSuccessful || undoRedoOperation.userIsDeleting) {
-            Log.d(TAG, "undoChanges: Was not Successful or Is Deleting")
-            undoRedoNavMenuController.setUndoState(false)
+            if (shouldDeactivate) {
+                undoRedoNavMenuController.setUndoState(false)
+                undoRedoNavMenuController.updateNavMenu()
+            }
         }
     }
 
@@ -295,17 +290,14 @@ class UndoRedoTextHelper(
         //Get current text string from Edit Text
         val oldText = focusedEditText?.text.toString()
 
-        val isSuccessful = undoRedoOperation.redo(amount, oldText) { newText, index ->
-            setFocusedEditTextField(newText, index)
-            if (newText == undoRedoOperation.currentStoredString) {
-                Log.d(TAG, "redoChanges: All Changes Redone")
-                undoRedoNavMenuController.setRedoState(false)
+        undoRedoOperation.redo(amount, oldText) { newText, index, isSuccess, shouldDeactivate ->
+            if (isSuccess) {
+                setFocusedEditTextField(newText, index)
             }
-        }
-        //Operation was not successful. Deactivate Redo menu items
-        if (!isSuccessful || undoRedoOperation.userIsDeleting) {
-            Log.d(TAG, "redoChanges: Was Not Successful or Is Deleting")
-            undoRedoNavMenuController.setRedoState(false)
+            if (shouldDeactivate) {
+                undoRedoNavMenuController.setRedoState(false)
+                undoRedoNavMenuController.updateNavMenu()
+            }
         }
     }
 
@@ -337,6 +329,7 @@ class UndoRedoTextHelper(
         focusedEditText = null
         textView.removeTextChangedListener(this)
         undoRedoNavMenuController.clearAllRef()
+        undoRedoOperation.clearTextHistory()
     }
 
     @EntryPoint

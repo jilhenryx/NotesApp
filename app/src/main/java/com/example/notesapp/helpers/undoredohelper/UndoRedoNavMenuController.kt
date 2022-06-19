@@ -80,7 +80,7 @@ class UndoRedoNavMenuController(
         resetMenuState()
     }
 
-    private fun updateNavMenu() {
+    internal fun updateNavMenu() {
         navView?.menu?.findItem(undoAllMenuId)?.isEnabled = getUndoState()
         navView?.menu?.findItem(undoMenuId)?.isEnabled = getUndoState()
         navView?.menu?.findItem(redoMenuId)?.isEnabled = getRedoState()
