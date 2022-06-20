@@ -8,7 +8,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_note_list_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         tools:strokeColor="@color/yellow_900"
         app:strokeWidth="@dimen/stroke_small"
         app:cardCornerRadius="@dimen/margin_small"
@@ -18,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_note_list_item_title"
@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:textAlignment="center"
                 android:transitionName="@string/transition_name_note_title"
                 tools:text="@string/tv_default_text"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
@@ -37,15 +38,16 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_note_list_item_text"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:ellipsize="end"
-                android:maxLines="6"
+                android:maxLines="7"
                 android:transitionName="@string/transition_name_note_text"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginVertical="@dimen/margin_small"
                 tools:text="@string/tv_default_text"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_note_list_item_category"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_note_list_item_title" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -54,14 +56,15 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:layout_marginTop="@dimen/margin_small"
+                android:textAlignment="center"
+                android:layout_marginBottom="@dimen/margin_small"
                 tools:text="@string/tv_default_text"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_note_list_item_text" />
+                app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -1,15 +1,14 @@
 package com.example.notesapp.ui
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.notesapp.R
 import com.example.notesapp.adapters.NoteListAdapter
 import com.example.notesapp.databinding.ActivityMainContentBinding
@@ -22,12 +21,12 @@ private const val TAG = "NoteListFragment"
 
 @AndroidEntryPoint
 class NoteListFragment : Fragment(), OnNoteClickListener {
-    private var layoutManagerSpan = 2
+    private val layoutManagerSpan = 2
     private var _binding: ActivityMainContentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    lateinit var notesAdapter: NoteListAdapter
-    private lateinit var staggeredLayoutManager: StaggeredGridLayoutManager
+    private lateinit var notesAdapter: NoteListAdapter
+    private lateinit var gridLayoutManager: GridLayoutManager
     private val viewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,26 +52,25 @@ class NoteListFragment : Fragment(), OnNoteClickListener {
         fab.setOnClickListener {
             startActivity(Intent(requireActivity(), NoteActivity::class.java))
         }
-        layoutManagerSpan =
-            if (requireActivity().resources.configuration.orientation
-                == Configuration.ORIENTATION_LANDSCAPE
-            ) 3
-            else 2
 
         recyclerView = binding.recyclerView
         notesAdapter = NoteListAdapter(this)
-        staggeredLayoutManager =
-            StaggeredGridLayoutManager(layoutManagerSpan, StaggeredGridLayoutManager.VERTICAL)
+        gridLayoutManager =
+            GridLayoutManager(requireContext(), layoutManagerSpan)
         displayNotes()
     }
 
     private fun displayNotes() {
         Log.d(TAG, "displayNotes: called")
         if (recyclerView.adapter == null) recyclerView.adapter = notesAdapter
-        if (recyclerView.layoutManager == null) recyclerView.layoutManager = staggeredLayoutManager
+        if (recyclerView.layoutManager == null) recyclerView.layoutManager = gridLayoutManager
+
         viewModel.displayNotes.observe(viewLifecycleOwner) { notes ->
             if (notes != null) {
                 Log.d(TAG, "displayNotes: Updating Recycler Notes - ${notes.size}")
+                requireActivity().title =
+                    if (viewModel.isNoteFiltered) getString(R.string.fragment_note_list_filtered_title)
+                    else getString(R.string.fragment_note_list_title)
                 notesAdapter.submitList(notes)
                 notesAdapter.notifyDataSetChanged()
             }

@@ -8,7 +8,8 @@
     <string name="action_bar_toggle_open_description">Open Navigation Drawer</string>
     <string name="action_bar_toggle_close_description">Close Navigation Draw</string>
     <!--TextView and EditText-->
-    <string name="fragment_note_list_title">Notes</string>
+    <string name="fragment_note_list_title">All Notes</string>
+    <string name="fragment_note_list_filtered_title">Filtered Notes</string>
     <string name="fragment_category_list_title">Categories</string>
     <string name="activity_note_title">Edit Note</string>
     <string name="activity_note_new_title">New Note</string>

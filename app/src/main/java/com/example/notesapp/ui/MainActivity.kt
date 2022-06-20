@@ -17,9 +17,7 @@ private const val TAG = "MainActivity"
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val toolbarTitleBundleKey = "${TAG}.toolbarTitleBundleKey"
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
+    private var binding: ActivityMainBinding? = null
     private lateinit var toolbar: Toolbar
     private val viewModel: MainActivityViewModel by viewModels()
 
@@ -27,14 +25,16 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate:")
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_NotesAppGlobal_NotesAppBase_NotesApp)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
         window.allowEnterTransitionOverlap = true
         //Set up toolbar
-        toolbar = binding.toolbarActivityMain
+        toolbar = binding!!.toolbarActivityMain
         setSupportActionBar(toolbar)
-        title = savedInstanceState?.getString(toolbarTitleBundleKey)
-            ?: getString(R.string.fragment_note_list_title)
+
+        title =
+            if (viewModel.isNoteFiltered) getString(R.string.fragment_note_list_filtered_title)
+            else getString(R.string.fragment_note_list_title)
 
         // Setting Up Toolbar with NavController
         val navHostFragment = supportFragmentManager
@@ -51,11 +51,6 @@ class MainActivity : AppCompatActivity() {
         //Make DB requests
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(toolbarTitleBundleKey, toolbar.title.toString())
-        super.onSaveInstanceState(outState)
-    }
-
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume: ")
@@ -64,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        _binding = null
+        binding = null
         super.onDestroy()
     }
 }

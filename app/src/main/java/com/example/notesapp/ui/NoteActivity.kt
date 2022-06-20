@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
@@ -46,6 +47,7 @@ class NoteActivity : AppCompatActivity() {
         editTextNoteTitle = binding.activityNoteContent.editTextActivityNoteTitle
         editTextNoteText = binding.activityNoteContent.editTextActivityNoteText
         bottomNav = binding.bottomNavActivityNoteMain
+
         //Setting Up Toolbar
         setSupportActionBar(toolbar)
 
@@ -108,6 +110,14 @@ class NoteActivity : AppCompatActivity() {
             bottomNavController,
             this
         )
+        //Hide Soft Keyboard if focus is on AutoCompleteView since it is being used as a spinner
+        autoCompleteNoteCategory.setOnFocusChangeListener { view, hasFocus ->
+            if (view != null && hasFocus) {
+                val imm =
+                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
     }
 
     private fun storeOriginalValues() {

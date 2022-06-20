@@ -10,12 +10,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val NOTES_FILTER_BUNDLE_KEY = "${PACKAGE_NAME}.NOTES_FILTER_BUNDLE_KEY"
-private const val TAG = "MainActivityViewModel"
-
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val repository: NotesRepository
 ) : ViewModel() {
     private var previousFilterKey = ""
@@ -32,11 +29,17 @@ class MainActivityViewModel @Inject constructor(
     internal var isNoteFiltered = false
     internal val displayNotes: LiveData<List<NoteWithCategory>> get() = _displayedNotesMediator
 
+    companion object {
+        private const val NOTES_FILTER_BUNDLE_KEY = "${PACKAGE_NAME}.NOTES_FILTER_BUNDLE_KEY"
+        private const val TAG = "MainActivityViewModel"
+    }
+
     internal fun filterNotes(filter: String) {
         Log.d(TAG, "filterNotes: ")
         if (filter != previousFilterKey) {
             previousFilterKey = filter
-            savedStateHandle[NOTES_FILTER_BUNDLE_KEY] = filter
+            notesFilterKey.value = filter
+//            savedStateHandle[NOTES_FILTER_BUNDLE_KEY] = filter
         }
     }
 

@@ -51,13 +51,13 @@ class UndoRedoNavMenuController(
             navView!!.isVisible = isVisible
             navView!!.animate()
                 .alpha(1.0f)
-                .setDuration(350)
+                .setDuration(300)
                 .start()
         } else {
             if (navView!!.visibility == View.GONE) return
             navView!!.animate()
                 .alpha(0.0f)
-                .setDuration(350)
+                .setDuration(250)
                 .setListener(object : AnimatorListenerAdapter() {
                     private var isCancelled = false
                     override fun onAnimationCancel(animation: Animator?) {

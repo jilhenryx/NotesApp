@@ -244,7 +244,6 @@ class UndoRedoTextHelper(
      */
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         if (view == null) return
-
         //Reset all states including NavMenuController states when Focus Leaves EditText
         if (!hasFocus) {
             resetWatchers()
