@@ -15,6 +15,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/notesapp_splash_graphic_light" />
+            android:src="@drawable/splash_image_light_" />
     </item>
 </layer-list>
