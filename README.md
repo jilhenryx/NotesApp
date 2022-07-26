@@ -5,7 +5,7 @@ NotesApp is a simple note-taking native android application written in Kotlin us
 - [Getting Started](https://github.com/jilhenryx/NotesApp#getting-started).
 - [Technical Details](https://github.com/jilhenryx/NotesApp#technical-details).
 - [Project Samples](https://github.com/jilhenryx/NotesApp#project-samples).
-- [Areas of Further Improvement](https://github.com/jilhenryx/NotesApp#areas-of-further-improvement).
+- [Areas of Further Improvement](https://github.com/jilhenryx/NotesApp#areas-of-further-improvement-aka-todo).
 
 ## Getting Started
 NotesApp uses Kotlin and recent Android libraries as at the point of the last commit.
@@ -20,19 +20,29 @@ Clone repository and build in Android Studio
 - Background Operation: Kotlin Coroutines
 - DI: Hilt
 
+[Back Up](https://github.com/jilhenryx/NotesApp#table-of-contents) :point_up_2:
+
 ## Project Samples
 ### Note List Activity (with Fragments)
 ![NotesList Activity Flow](/gitmedia/NotesApp-Edited.gif)
 
+[Back Up](https://github.com/jilhenryx/NotesApp#table-of-contents) :point_up_2:
+
 ### Notes Activity
 ![Notes Activity Flow](/gitmedia/NotesApp-Edit-Note-Edited.gif)
 
+[Back Up](https://github.com/jilhenryx/NotesApp#table-of-contents) :point_up_2:
+
 ### Notes Activity (Light Mode)
 ![Notes Activity Flow (Light Mode)](/gitmedia/NotesApp-Edit-Note2-Edited.gif)
+
+[Back Up](https://github.com/jilhenryx/NotesApp#table-of-contents) :point_up_2:
 
 ## Areas of Further Improvement (a.k.a TODO)
 - [ ] Integrate Cloud Functionality to persist notes across devices
 - [ ] User Authentication in sync with cloud storage
 - [ ] Routine upload to cloud storage
 - [ ] Settings Screen
+
+[Back Up](https://github.com/jilhenryx/NotesApp#table-of-contents) :point_up_2:
 
