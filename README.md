@@ -1,5 +1,5 @@
 # NotesApp
-NotesApp is a simple note-taking native android application written in Kotlin using Android Views and Jetpack Library. It has a custom UndoRedo component that extends the functionality of EditText Views to keep track of changes per word. This component requires a NavigationBar to hold the various menu options for - UndoAll, Undo. Redo and RedoAll.
+NotesApp is a simple note-taking native android application written in Kotlin using Android Views and Jetpack Library. The notes in the app are categorized and color-coded based on the categories. It also features a Read Mode, an Edit Mode and a custom UndoRedo component that extends the functionality of EditText Views to keep track of changes per word. This component requires a NavigationBar to hold the various menu options for - UndoAll, Undo. Redo and RedoAll.
 
 ## Table of Contents
 - [Getting Started](https://github.com/jilhenryx/NotesApp#getting-started).
